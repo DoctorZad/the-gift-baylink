@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1500" width="1000" height="1500" role="img" aria-label="Book cover: The Gift, a novel by David J. Baylink">
+  <defs>
+    <linearGradient id="board" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#8a5a38"/>
+      <stop offset="28%" stop-color="#6e4328"/>
+      <stop offset="68%" stop-color="#5a341e"/>
+      <stop offset="100%" stop-color="#3f2414"/>
+    </linearGradient>
+    <linearGradient id="foil" x1="0" y1="0" x2="1" y2="0.35">
+      <stop offset="0%" stop-color="#8d6a2f"/>
+      <stop offset="18%" stop-color="#e6c986"/>
+      <stop offset="38%" stop-color="#fdf1d0"/>
+      <stop offset="58%" stop-color="#d8b264"/>
+      <stop offset="80%" stop-color="#f2ddab"/>
+      <stop offset="100%" stop-color="#9a7534"/>
+    </linearGradient>
+    <linearGradient id="spineShade" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#000" stop-opacity="0.55"/>
+      <stop offset="55%" stop-color="#000" stop-opacity="0.10"/>
+      <stop offset="100%" stop-color="#000" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="vign" cx="0.5" cy="0.4" r="0.85">
+      <stop offset="50%" stop-color="#000" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#1a0c06" stop-opacity="0.42"/>
+    </radialGradient>
+    <linearGradient id="sheen" x1="0" y1="0" x2="1" y2="0.2">
+      <stop offset="0%" stop-color="#fff" stop-opacity="0.10"/>
+      <stop offset="38%" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="72%" stop-color="#fff" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="grain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.08"/></feComponentTransfer>
+    </filter>
+    <filter id="leather">
+      <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="4" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.18"/></feComponentTransfer>
+    </filter>
+  </defs>
+
+  <rect width="1000" height="1500" fill="url(#board)"/>
+  <rect width="1000" height="1500" filter="url(#leather)" opacity="0.55"/>
+  <rect width="1000" height="1500" filter="url(#grain)" opacity="0.7"/>
+  <rect width="1000" height="1500" fill="url(#sheen)"/>
+
+  <!-- faint bone-trabecula lattice, the science under the story -->
+  <g stroke="#e8c99a" stroke-opacity="0.12" stroke-width="1.4" fill="none">
+    <path d="M120 980 L250 1050 L250 1200 L120 1270 L-10 1200 L-10 1050 Z"/>
+    <path d="M380 980 L510 1050 L510 1200 L380 1270 L250 1200 L250 1050 Z"/>
+    <path d="M640 980 L770 1050 L770 1200 L640 1270 L510 1200 L510 1050 Z"/>
+    <path d="M900 980 L1030 1050 L1030 1200 L900 1270 L770 1200 L770 1050 Z"/>
+    <path d="M250 1200 L380 1270 L380 1420 L250 1490 L120 1420 L120 1270 Z"/>
+    <path d="M510 1200 L640 1270 L640 1420 L510 1490 L380 1420 L380 1270 Z"/>
+    <path d="M770 1200 L900 1270 L900 1420 L770 1490 L640 1420 L640 1270 Z"/>
+    <path d="M250 700 L380 770 L380 920 L250 990 L120 920 L120 770 Z"/>
+    <path d="M770 700 L900 770 L900 920 L770 990 L640 920 L640 770 Z"/>
+  </g>
+
+  <!-- foil frame -->
+  <rect x="62" y="62" width="876" height="1376" fill="none" stroke="url(#foil)" stroke-opacity="0.62" stroke-width="2"/>
+  <rect x="78" y="78" width="844" height="1344" fill="none" stroke="url(#foil)" stroke-opacity="0.28" stroke-width="1"/>
+
+  <g text-anchor="middle" font-family="'Cormorant Garamond','EB Garamond',Garamond,'Times New Roman',serif">
+    <text x="500" y="290" fill="#f3e2c4" fill-opacity="0.78" font-size="34" letter-spacing="14" font-family="'Jost','Helvetica Neue',Helvetica,Arial,sans-serif">A NOVEL</text>
+
+    <line x1="330" y1="340" x2="670" y2="340" stroke="url(#foil)" stroke-width="1.6" stroke-opacity="0.85"/>
+
+    <text x="500" y="590" fill="url(#foil)" font-size="240" letter-spacing="6" font-weight="600">THE</text>
+    <text x="500" y="810" fill="url(#foil)" font-size="240" letter-spacing="6" font-weight="600">GIFT</text>
+
+    <line x1="330" y1="890" x2="670" y2="890" stroke="url(#foil)" stroke-width="1.6" stroke-opacity="0.85"/>
+
+    <text x="500" y="1330" fill="#f6ead8" font-size="52" letter-spacing="9" font-family="'Jost','Helvetica Neue',Helvetica,Arial,sans-serif" font-weight="300">DAVID J. BAYLINK</text>
+    <text x="500" y="1382" fill="#e0c07a" fill-opacity="0.85" font-size="24" letter-spacing="7" font-family="'Jost','Helvetica Neue',Helvetica,Arial,sans-serif">MD</text>
+  </g>
+
+  <g transform="translate(500 1035)" fill="none" stroke="url(#foil)" stroke-opacity="0.92">
+    <circle r="54" stroke-width="1.6"/>
+    <circle r="40" stroke-width="0.8" stroke-opacity="0.45"/>
+    <path d="M0 -40 L0 40 M-40 0 L40 0" stroke-width="0.8" stroke-opacity="0.28"/>
+    <circle r="7" fill="url(#foil)" stroke="none"/>
+  </g>
+
+  <rect width="1000" height="1500" fill="url(#vign)"/>
+  <rect width="46" height="1500" fill="url(#spineShade)"/>
+</svg>
