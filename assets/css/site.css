@@ -401,7 +401,7 @@ p:last-child { margin-bottom: 0; }
   --p: 0;
 }
 
-.bookscroll__track { height: 460vh; }
+.bookscroll__track { height: 640vh; }
 
 .bookscroll__stage {
   position: sticky;
@@ -410,15 +410,15 @@ p:last-child { margin-bottom: 0; }
   display: grid;
   place-items: center;
   overflow: hidden;
-  perspective: 1600px;
-  perspective-origin: 50% 42%;
+  perspective: 1050px;
+  perspective-origin: 50% 46%;
 }
 
 /* ambient light pool under the book */
 .bookscroll__glow {
   position: absolute;
-  width: 78vmin;
-  height: 78vmin;
+  width: 96vmin;
+  height: 96vmin;
   border-radius: 50%;
   background: radial-gradient(circle, rgba(196, 154, 74, 0.28), rgba(90, 52, 30, 0) 68%);
   filter: blur(12px);
@@ -428,12 +428,12 @@ p:last-child { margin-bottom: 0; }
 
 .bookscroll__caption {
   position: absolute;
-  top: clamp(4.5rem, 11vh, 8rem);
+  top: clamp(3.6rem, 7.5vh, 6.2rem);
   left: 50%;
   transform: translateX(-50%);
   text-align: center;
   width: min(100% - 2.5rem, 38rem);
-  height: clamp(8rem, 15vh, 11rem);
+  height: clamp(5.5rem, 11vh, 8rem);
   pointer-events: none;
   z-index: 4;
 }
@@ -465,9 +465,9 @@ p:last-child { margin-bottom: 0; }
 /* --- the book itself --- */
 
 .book {
-  --bw: clamp(10.5rem, 23vmin, 18rem);
-  --bh: clamp(15.5rem, 34vmin, 26rem);
-  --thick: clamp(1.7rem, 3.8vmin, 3rem);
+  --bw: clamp(13.5rem, 34vmin, 26rem);
+  --bh: clamp(20rem, 51vmin, 39rem);
+  --thick: clamp(2.4rem, 5.4vmin, 4.2rem);
 
   position: relative;
   width: var(--bw);
@@ -475,11 +475,11 @@ p:last-child { margin-bottom: 0; }
   transform-style: preserve-3d;
   transform:
     translateX(var(--shift, 0px))
-    translateY(calc(var(--lift, 0px) - 4vh))
-    rotateX(var(--tiltx, 38deg))
-    rotateZ(var(--tiltz, -10deg))
-    rotateY(var(--tilty, -28deg))
-    scale(var(--zoom, 0.78));
+    translateY(calc(var(--lift, 0px) - 2vh))
+    rotateX(var(--tiltx, 48deg))
+    rotateZ(var(--tiltz, -12deg))
+    rotateY(var(--tilty, -36deg))
+    scale(var(--zoom, 0.82));
   will-change: transform;
 }
 
@@ -694,7 +694,7 @@ p:last-child { margin-bottom: 0; }
 .book__cover-edge {
   position: absolute;
   top: 0; bottom: 0; right: 0;
-  width: 0.28rem;
+  width: 0.42rem;
   background: linear-gradient(to right, #8a5a38, #3f2414);
   transform: rotateY(90deg);
   transform-origin: right center;

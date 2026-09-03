@@ -13,8 +13,14 @@
   const phase = (value, from, to) => clamp01((value - from) / (to - from));
 
   const easeInOut = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+  const easeInOutQuint = (t) =>
+    t < 0.5 ? 16 * Math.pow(t, 5) : 1 - Math.pow(-2 * t + 2, 5) / 2;
   const easeOut = (t) => 1 - Math.pow(1 - t, 3);
   const lerp = (a, b, t) => a + (b - a) * t;
+  const smoothstep = (t, a, b) => {
+    const x = clamp01((t - a) / (b - a));
+    return x * x * (3 - 2 * x);
+  };
 
   /* ------------------------------------------------------------- header -- */
 
@@ -91,22 +97,23 @@
     scene.style.setProperty("--p", p.toFixed(4));
 
     /* 1. approach — the book swings up out of the dark and squares itself */
-    const approach = easeOut(phase(p, 0, 0.15));
+    const approach = easeOut(phase(p, 0, 0.12));
 
-    /* 2. the cover swings open on the spine */
-    const opening = easeInOut(phase(p, 0.15, 0.52));
+    /* 2. the cover swings open on the spine — quintic ease keeps the hinge
+       slow at both ends so the board does not whip past the camera. */
+    const opening = easeInOutQuint(phase(p, 0.1, 0.6));
 
-    /* 3. settle — the open spread tips toward the reader */
-    const settle = easeInOut(phase(p, 0.78, 1));
+    /* 3. settle — the open spread tips toward the reader, still in 3D */
+    const settle = easeInOut(phase(p, 0.82, 1));
 
     /* Stop a whisker short of 180deg: the open board has to end up parallel to
        the page plane, or its outer edge lifts in front of the pages lying on it. */
-    const cover = lerp(0, -179, opening);
-    const tiltx = lerp(lerp(42, 14, approach), 6, settle);
-    const tiltz = lerp(-12, 0, approach);
-    const tilty = lerp(lerp(-32, -4, approach), 0, settle);
-    const zoom = lerp(lerp(0.68, 1, approach), 1.08, settle);
-    const lift = lerp(60, 0, approach);
+    const cover = lerp(0, -178, opening);
+    const tiltx = lerp(lerp(50, 18, approach), 12, settle);
+    const tiltz = lerp(-14, -2, approach);
+    const tilty = lerp(lerp(-38, -12, approach), -7, settle);
+    const zoom = lerp(lerp(0.78, 1.06, approach), 1.16, settle);
+    const lift = lerp(48, 8, approach);
     /* The spine sits on the book's left edge, so the spread grows leftward;
        nudge right by half a page to keep the open book centred. */
     const shift = (bookWidth / 2) * opening;
@@ -127,17 +134,17 @@
     /* 4. pages turn, one after another, as the reader keeps scrolling.
        A leaf is edge-on at the halfway point, which is where it can be moved
        from the right-hand stack to the top of the left-hand pile unseen. */
-    const first = 0.44;
+    const first = 0.42;
     const last = 0.9;
     const span = last - first;
     const visible = leaves.filter((l) => l.style.display !== "none");
-    const stagger = visible.length > 1 ? span / (visible.length + 1.6) : span;
+    const stagger = visible.length > 1 ? span / (visible.length + 2.1) : span;
 
     visible.forEach((leaf, i) => {
       const start = first + stagger * i;
-      const t = easeInOut(phase(p, start, start + stagger * 1.9));
-      const depth = t < 0.5 ? -(i * 0.9) - 1 : spine + 12 + i * 1.2;
-      leaf.style.transform = `translateZ(${depth.toFixed(1)}px) rotateY(${(-172 * t).toFixed(2)}deg)`;
+      const t = easeInOutQuint(phase(p, start, start + stagger * 2.15));
+      const depth = lerp(-(i * 1.2) - 2, spine + 16 + i * 1.6, smoothstep(t, 0.36, 0.64));
+      leaf.style.transform = `translateZ(${depth.toFixed(1)}px) rotateY(${(-176 * t).toFixed(2)}deg)`;
     });
 
     /* 5. the line that closes the scene */
