@@ -264,6 +264,25 @@
     });
   });
 
+  /* ----------------------------------------------------------- lightbox -- */
+
+  const lightbox = document.querySelector(".lightbox");
+  if (lightbox && typeof lightbox.showModal === "function") {
+    const lightboxImg = lightbox.querySelector("img");
+    document.querySelectorAll("[data-lightbox]").forEach((link) => {
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+        const thumb = link.querySelector("img");
+        lightboxImg.src = link.href;
+        lightboxImg.alt = thumb ? thumb.alt : "";
+        lightbox.showModal();
+      });
+    });
+    lightbox.addEventListener("click", (e) => {
+      if (e.target === lightbox) lightbox.close();
+    });
+  }
+
   /* --------------------------------------------------------- active nav -- */
 
   const sections = Array.from(document.querySelectorAll("main section[id]"));
