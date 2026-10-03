@@ -47,36 +47,29 @@ The site is static — Vercel does not need a build command.
 ## The book that opens as you scroll
 
 `.bookscroll` on the home page is a 460vh tall track containing a sticky, full-height stage. As the
-track passes through the viewport, `assets/js/site.js` turns scroll position into a single progress
-value `p` between 0 and 1 and drives five overlapping phases from it:
+track passes through the viewport, scroll position becomes a single progress value `p` between 0
+and 1 that drives overlapping phases:
 
 1. **0.00 – 0.15** the closed book rises out of the dark and squares up to the reader
-2. **0.15 – 0.52** the front cover swings open on the spine
-3. **0.44 – 0.90** the front-matter leaves turn one after another
-4. **0.78 – 1.00** the open spread tips toward the reader and settles on chapter one
+2. **0.15 – 0.50** the front cover swings open on the spine
+3. **0.44 – 0.88** three front-matter leaves bend and turn one after another
+4. **0.78 – 1.00** the camera settles over the open spread on chapter one
 5. **0.86 – 1.00** the closing line fades up beneath it
 
-It is built from CSS 3D transforms rather than a video file, which means it is sharp at any screen
-size, costs nothing to download, scrubs perfectly under the reader's own scrolling, and works on iOS
-Safari — where scrubbing a real `<video>` frame by frame does not.
+The book is a real 3D model rendered with Three.js (`assets/vendor/three.module.min.js`, r170) by
+`assets/js/book3d.js`: hard boards wrapped in `assets/img/cover.jpg`, a thick page block whose top
+curves down into the gutter, bending paper leaves, soft shadows, and a red rim light taken from the
+cover's doorway. The page text is drawn into canvas textures with the site's web fonts, so it stays
+sharp and needs no extra image files. It only re-renders when the scroll position changes.
 
-Two details in the code are load-bearing and easy to break:
-
-- **The open cover stops at −179°, not −166°.** It has to end up parallel to the page plane. Any
-  further from flat and its outer edge lifts in front of the pages lying on top of it.
-- **Each leaf changes depth at its halfway point.** A turning leaf is edge-on at 90°, which is the
-  one moment it can be moved from the right-hand stack to the top of the left-hand pile without the
-  jump being visible.
-
-On screens under 700px wide the script hides all but two leaves to keep the compositing cheap.
-Under `prefers-reduced-motion` the track collapses to 120vh and all transitions are disabled.
+`assets/js/site.js` handles the captions, progress bar and closing line. If WebGL is unavailable the
+stage gets `.is-fallback` and simply shows the flat cover image. Under `prefers-reduced-motion` the
+track collapses to 120vh.
 
 ## Replacing the cover
 
-`assets/img/cover.svg` is a typographic cover drawn in SVG — deep slate boards, gold foil title, and
-a faint bone-trabecula lattice behind the type. When the real cover art exists, drop it in as
-`assets/img/cover.jpg` and update the four references to `cover.svg`.
-
+Drop new art in as `assets/img/cover.jpg` (992 × 1585, or the same 5:8 ratio). The 3D book, the
+synopsis cover and the social preview image on `the-gift.html` all read that one file.
 ## Content sources
 
 Everything quoted on the site is taken verbatim from the manuscript or from published interviews.
